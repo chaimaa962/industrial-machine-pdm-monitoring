@@ -35,16 +35,22 @@ This project implements an **intelligent industrial monitoring system** using **
 ## 🔧 How Virtual Serial Communication Works
 
 ### 🔄 Communication Flow (Proteus Simulation):
+
 Proteus Simulation (Arduino Uno)
-      │
+
+       │
 ▼ (Virtual Serial via COMPIN)
+
 COM1 (Virtual Port) ← Proteus sends: "V:1.5(100%) P:500(100%) E:1"
-      │
+
+       │
 ▼ (Virtual Serial Bridge)
+
 COM3 (Virtual Port) ← Web interface reads this port
-      │
+       │
 ▼
 Web Dashboard
+
 (Displays live graphs and alerts)
 
 
@@ -104,11 +110,17 @@ Monitor real-time simulated data
 
 📊 System States & Indicators
 State	Vibration	Pressure	LED	Buzzer	LCD Display
+
 Normal	<2.0g	400-600	Green (Solid)	Silent	"Normal Operation"
+
 Warning	2.0-2.8g	700-850	Yellow (Blink 1s)	Beep every 3s	"Warning"
+
 Critical	>2.8g	<150 or >850	Red (Blink 500ms)	Rapid beeps	"CRITICAL: STOP"
+
 Emergency	-	-	Red (Solid)	Continuous	"EMERGENCY STOP"
+
 🔗 Data Format
+
 Format: V:[value]([percentage]%) P:[value]([percentage]%) E:[state]
 
 Examples:
@@ -124,7 +136,9 @@ Emergency: V:0.0(0%) P:0(0%) E:4
 Frequency: Every 2 seconds + immediate on state change
 
 # Conclusion
-Achievements:
+
+# Achievements:
+
 ✅ Complete Simulation System - Successfully designed and implemented a functional industrial monitoring system using Proteus simulation
 
 ✅ Virtual Communication - Implemented COMPIN virtual serial communication between Proteus and Python
@@ -135,7 +149,8 @@ Achievements:
 
 ✅ Educational Value - Demonstrated complete IoT system design without physical hardware requirements
 
-Technical Implementation:
+# Technical Implementation:
+
 Proteus Simulation: Complete circuit design with virtual components
 
 Virtual Serial Communication: COMPIN to COM1 to COM3 bridge
@@ -144,7 +159,8 @@ Web Interface: Real-time data visualization from simulated sensors
 
 Intelligent Algorithms: Drift detection and hierarchical alert system
 
-Future Enhancements:
+# Future Enhancements:
+
 Integration with physical hardware
 
 Cloud-based data storage
