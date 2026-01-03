@@ -1,48 +1,48 @@
 # industrial-machine-pdm-monitoring
-Arduino-based industrial machine monitoring system for predictive maintenance with web interface.project 2025/2026.
 
-📡 How COM1 ↔ COM3 Communication Works
-🔄 Serial Communication Flow:
-Arduino Board
-    │
-    ▼ (Serial Data via USB)
-COM1 (Physical Port) ← Arduino sends: "V:1.5(100%) P:500(100%) E:1"
-    │
-    ▼ (Virtual Serial Bridge)
-COM3 (Virtual Port) ← Web Interface reads this port
-    │
-    ▼
-Web Browser Dashboard
-    (Displays live graphs & alerts)
+## 🏭 Système de Surveillance Industrielle pour Maintenance Prédictive
 
-🔧 Hardware ↔ Software Connection:
-1. Arduino Side (Physical - COM1)
-Arduino connects to computer via USB cable
+**Auteur :** Chaimaa BENADLA  
+**Master :** Cybersécurité et Intelligence Artificielle (CYSIA)  
+**Année Universitaire :** 2025/2026  
+**Université :** Université << BELHADJ BOUCHAIB >> - Ain Témouchent
 
-Computer recognizes it as COM1 (or COMx) serial port
+---
 
-Arduino sends data every 2 seconds in this format:
-V:1.5(100%) P:500(100%) E:1
-Where:
+## 📋 Aperçu du Projet
+Ce projet implémente un **système intelligent de surveillance industrielle** utilisant **Arduino Uno** pour la **maintenance prédictive (PdM)**. Le système surveille les vibrations et la pression des machines en temps réel, détecte les anomalies et fournit des alertes précoces via des indicateurs locaux et une interface web.
 
-V:1.5 = Vibration value (1.5g)
+## 🎯 Fonctionnalités Principales
+- ✅ Surveillance en temps réel des vibrations (0-3g) et pression (0-1000 unités)
+- ✅ Algorithme intelligent de détection de dérive pour alertes précoces
+- ✅ Système hiérarchique à 5 niveaux (Normal → Urgence)
+- ✅ Interface locale : LCD 16x2 + LEDs RVB + Buzzer
+- ✅ Interface web avec graphiques en direct et historique
+- ✅ Bouton d'arrêt d'urgence avec temps de réponse <50ms
+- ✅ Communication série avec 99.8% de fiabilité
 
-(100%) = Percentage of normal
+---
 
-P:500 = Pressure value (500 units)
+## 📸 Photos du Projet
 
-E:1 = System state (1=Normal, 2=Warning, 3=Critical, 4=Emergency)
+### 1. Schéma Électrique Complet
+![Schéma du Circuit](schéma.png)
+*Schéma électrique complet réalisé sous Proteus montrant toutes les connexions*
 
-2. Computer Side (Virtual Bridge - COM3)
-Virtual Serial Port Emulator creates COM1→COM3 bridge
+### 2. Montage Arduino
+![Montage Arduino](images/arduino_setup.jpg)
+*Photo du montage Arduino complet avec tous les capteurs*
 
-Why? Because some web browsers can't read COM1 directly
+### 3. Interface Web
+![Dashboard Web](images/web_interface.png)
+*Capture d'écran de l'interface web en temps réel*
 
-Software example: com0com or Virtual Serial Port Driver
+### 4. Affichage LCD
+![Écran LCD](images/lcd_display.jpg)
+*Photo de l'écran LCD affichant les valeurs*
 
-3. Web Interface Side
-JavaScript reads from COM3 using Web Serial API
+---
 
-Parses the data: V:1.5(100%) P:500(100%) E:1
+## 🔧 Comment la Communication COM1 ↔ COM3 Fonctionne
 
-Updates graphs and colors in real-time
+### 🔄 Flux de Communication Série :
