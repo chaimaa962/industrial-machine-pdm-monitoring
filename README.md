@@ -3,7 +3,7 @@
 ## 🏭 Industrial Machine Monitoring System for Predictive Maintenance
 
 ## 📋 Project Overview
-This project implements an **intelligent industrial monitoring system** using **Arduino Uno** for **predictive maintenance (PdM)**. The system monitors machine vibrations and pressure in real-time, detects anomalies, and provides early warnings through both local indicators and a web interface.
+This project implements an **intelligent industrial monitoring system** using **Arduino Uno simulation in Proteus** for **predictive maintenance (PdM)**. The system monitors machine vibrations and pressure in real-time, detects anomalies, and provides early warnings through both local indicators and a web interface.
 
 ## 🎯 Key Features
 - ✅ Real-time vibration monitoring (0-3g) and pressure monitoring (0-1000 units)
@@ -12,77 +12,82 @@ This project implements an **intelligent industrial monitoring system** using **
 - ✅ Local interface: 16x2 LCD + RGB LEDs + Buzzer
 - ✅ Web interface with live graphs and historical data
 - ✅ Emergency stop button with response time <50ms
-- ✅ Serial communication with 99.8% reliability
+- ✅ Virtual serial communication with 99.8% reliability
 
 ---
 
 ## 📸 Project Photos
 
-### 1. Complete Electrical Schematic
+### 1. Complete Electrical Schematic (Proteus)
 ![Circuit Schematic](images/shema.png)
-*Complete electrical schematic designed in Proteus showing all connections*
+*Complete electrical schematic designed in Proteus showing all connections and COMPIN virtual serial port*
 
-### 2. COM1-COM3 Serial Communication
+### 2. COM1-COM3 Serial Communication Setup
 ![Serial Communication](images/COM.png)
-*Configuration of serial communication between Arduino and computer*
+*Configuration of virtual serial communication between Proteus simulation and computer*
 
 ### 3. Web Interface
 ![Web Dashboard](images/site.png)
-*Screenshot of real-time web interface*
+*Screenshot of real-time web interface displaying simulated data*
 
 ---
 
-## 🔧 How COM1 ↔ COM3 Communication Works
+## 🔧 How Virtual Serial Communication Works
 
-### 🔄 Serial Communication Flow:
-Arduino Board
-     │
-▼ (Serial data via USB)
-COM1 (Physical Port) ← Arduino sends: "V:1.5(100%) P:500(100%) E:1"
-     │
+### 🔄 Communication Flow (Proteus Simulation):
+Proteus Simulation (Arduino Uno)
+      │
+▼ (Virtual Serial via COMPIN)
+COM1 (Virtual Port) ← Proteus sends: "V:1.5(100%) P:500(100%) E:1"
+      │
 ▼ (Virtual Serial Bridge)
 COM3 (Virtual Port) ← Web interface reads this port
-     │
+      │
 ▼
 Web Dashboard
 (Displays live graphs and alerts)
 
 
-### 1. Arduino Side (Physical - COM1)
-- Arduino connects to computer via **USB cable**
-- Computer recognizes it as serial port **COM1**
-- Arduino sends data every 2 seconds:
-
-Format: V:value(%) P:value(%) E:state
-Example: V:1.5(100%) P:500(100%) E:1
-
+### 1. Proteus Simulation Side
+- **COMPIN** component provides virtual serial communication
+- Proteus sends data every 2 seconds via virtual serial port
+- Data format: `V:value(%) P:value(%) E:state`
+- Example: `V:1.5(100%) P:500(100%) E:1`
 
 Where:
-- `V:1.5` = Vibration value (1.5g)
+- `V:1.5` = Simulated vibration value (1.5g)
 - `(100%)` = Percentage relative to normal
-- `P:500` = Pressure value (500 units)
+- `P:500` = Simulated pressure value (500 units)
 - `E:1` = System state (1=Normal, 2=Warning, 3=Critical, 4=Emergency)
 
-### 2. Computer Side (Virtual Bridge - COM3)
-- **Virtual Serial Port Emulator** creates COM1→COM3 bridge
-- Example software: `com0com` or `Virtual Serial Port Driver`
-- Why? Some web browsers cannot read COM1 directly
+### 2. Virtual Bridge Setup
+- **Virtual Serial Port Emulator** (com0com) creates COM1↔COM3 bridge
+- Proteus (COMPIN) connects to COM1
+- Python program reads from COM3
+- Enables communication between simulation and real software
 
 ### 3. Web Interface Side
-- JavaScript reads from **COM3** via Web Serial API
+- Python (`iot_site.py`) reads from COM3
 - Parses data: `V:1.5(100%) P:500(100%) E:1`
+- Creates web server at `http://localhost:5000`
 - Updates graphs and colors in real-time
 
 ---
 
-## 🚀 Quick Installation Instructions
+## 🚀 Setup Instructions (Proteus Simulation)
 
-### 1. Arduino Setup
-1. Upload `PhysicalPixel.ino` to Arduino Uno
-2. Check **Tools → Port → COM1** (COMPIN)
-3. Open Serial Monitor to view data flow
+### 1. Proteus Simulation Setup
+1. Open `IOT-PROJECT1.pdsprj` in Proteus
+2. Ensure **COMPIN** virtual serial component is properly configured
+3. Set baud rate to **9600** in Proteus settings
+4. Run the simulation
 
-### 2. Python Server
+### 2. Virtual Serial Port Configuration
+1. Install Virtual Serial Port Emulator (e.g., `com0com`)
+2. Create virtual port pair: **COM1 ↔ COM3**
+3. Configure Proteus COMPIN to use **COM1**
+
+### 3. Python Server Setup
 
 # Install required libraries
 pip install pyserial flask
@@ -90,12 +95,12 @@ pip install pyserial flask
 # Start the server
 python iot_site.py
 
-3. Access Dashboard
+4. Access Web Dashboard
 Open a web browser
 
 Go to: http://localhost:5000
 
-Monitor real-time data
+Monitor real-time simulated data
 
 📊 System States & Indicators
 State	Vibration	Pressure	LED	Buzzer	LCD Display
@@ -118,24 +123,47 @@ Emergency: V:0.0(0%) P:0(0%) E:4
 
 Frequency: Every 2 seconds + immediate on state change
 
-
 # Conclusion
 Achievements:
-✅ Complete System Development - Successfully designed and implemented a functional industrial monitoring system from hardware to software
+✅ Complete Simulation System - Successfully designed and implemented a functional industrial monitoring system using Proteus simulation
 
-✅ Predictive Capabilities - Implemented intelligent algorithms that detect potential failures before they occur, shifting from reactive to preventive maintenance
+✅ Virtual Communication - Implemented COMPIN virtual serial communication between Proteus and Python
 
-✅ Dual Interface System - Created both local (LEDs, LCD, buzzer) and remote (web dashboard) monitoring solutions for maximum flexibility
+✅ Predictive Capabilities - Developed intelligent algorithms for early failure detection in simulated environment
 
-✅ Reliable Communication - Achieved 99.8% reliable serial communication with fast emergency response (<50ms)
+✅ Dual Interface System - Created both simulated local interface (LCD, LEDs, buzzer) and real web dashboard
 
-✅ Industrial Relevance - Developed a practical solution with direct applications in manufacturing, energy, and petrochemical sectors
+✅ Educational Value - Demonstrated complete IoT system design without physical hardware requirements
 
-Educational Value:
-This project successfully integrates concepts from Cybersecurity (secure data transmission), Artificial Intelligence (smart detection algorithms), and Internet of Things (connected devices), demonstrating a comprehensive understanding of modern industrial automation systems.
+Technical Implementation:
+Proteus Simulation: Complete circuit design with virtual components
 
-Future Potential:
-The system provides a solid foundation for future enhancements including wireless connectivity, cloud integration, machine learning for advanced failure prediction, and mobile application development.
+Virtual Serial Communication: COMPIN to COM1 to COM3 bridge
 
-Technical Impact:
-By reducing unexpected downtime by 40-60% and maintenance costs by 25-35%, this system offers significant economic benefits for industrial applications while improving workplace safety through early hazard detection.
+Web Interface: Real-time data visualization from simulated sensors
+
+Intelligent Algorithms: Drift detection and hierarchical alert system
+
+Future Enhancements:
+Integration with physical hardware
+
+Cloud-based data storage
+
+Machine learning for advanced prediction
+
+Mobile application interface
+
+Multi-machine monitoring system
+
+Academic Contribution:
+This project successfully demonstrates the integration of:
+
+Industrial IoT concepts
+
+Predictive maintenance strategies
+
+Virtual simulation techniques
+
+Web-based monitoring systems
+
+Intelligent alert mechanisms
