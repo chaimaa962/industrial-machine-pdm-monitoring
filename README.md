@@ -101,7 +101,7 @@ pip install pyserial flask
 # Start the server
 python iot_site.py
 
-4. Access Web Dashboard
+### 4. Access Web Dashboard
 Open a web browser
 
 Go to: http://localhost:5000
