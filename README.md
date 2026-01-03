@@ -2,13 +2,6 @@
 
 ## 🏭 Système de Surveillance Industrielle pour Maintenance Prédictive
 
-**Auteur :** Chaimaa BENADLA  
-**Master :** Cybersécurité et Intelligence Artificielle (CYSIA)  
-**Année Universitaire :** 2025/2026  
-**Université :** Université << BELHADJ BOUCHAIB >> - Ain Témouchent
-
----
-
 ## 📋 Aperçu du Projet
 Ce projet implémente un **système intelligent de surveillance industrielle** utilisant **Arduino Uno** pour la **maintenance prédictive (PdM)**. Le système surveille les vibrations et la pression des machines en temps réel, détecte les anomalies et fournit des alertes précoces via des indicateurs locaux et une interface web.
 
@@ -26,7 +19,7 @@ Ce projet implémente un **système intelligent de surveillance industrielle** u
 ## 📸 Photos du Projet
 
 ### 1. Schéma Électrique Complet
-![Schéma du Circuit](schéma.png)
+![Schéma du Circuit](schéma)
 *Schéma électrique complet réalisé sous Proteus montrant toutes les connexions*
 
 ### 2. Montage Arduino
