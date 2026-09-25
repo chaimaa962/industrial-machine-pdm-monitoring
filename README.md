@@ -38,16 +38,16 @@ This project implements an **intelligent industrial monitoring system** using **
 
 Proteus Simulation (Arduino Uno)
 
-       │
+|       
 ▼ (Virtual Serial via COMPIN)
 
 COM1 (Virtual Port) ← Proteus sends: "V:1.5(100%) P:500(100%) E:1"
 
-       │
+|       
 ▼ (Virtual Serial Bridge)
 
 COM3 (Virtual Port) ← Web interface reads this port
-       │
+|      
 ▼
 Web Dashboard
 
